@@ -1,6 +1,6 @@
 package sample
 
-	if prRef.Comments != nil {Add a comment on  lines R268 to R270Add diff commentMarkdown input: hybrid mode selected.WritePreviewHybridBold(command b) command⌘ bBItalic(command i) command⌘ iILink(command k) command⌘ kKCode(command e) command⌘ eEQuote(shift command period) shift⇧ command⌘ period.Unordered list(shift command 8) shift⇧ command⌘ 88Ordered list(shift command 7) shift⇧ command⌘ 77Task list(shift command l) shift⇧ command⌘ lLAttachmentCode blockHeadingStrikethrough(shift command x) shift⇧ command⌘ xXMore Formatting tools items 11Private previewLeave a commentCancelCommentStart a review
+	if prRef.Comments != nil {
 		payload["comments"] = prRef.Comments
 	}
 
