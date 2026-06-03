@@ -2,6 +2,7 @@ package sample
 
 	if prRef.Comments != nil {
 		payload["comments"] = prRef.Comments
+		prRef.Comments = nil
 	}
 
 import (
