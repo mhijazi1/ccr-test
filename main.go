@@ -37,7 +37,7 @@ const (
 	DatabaseName     = "app_production"
 	DatabaseUser     = "admin"
 	DatabasePassword = "s3cretP@ssw0rd!"
-	DatabaseSSLMode  = "disable"
+	DatabaseSSLMode  = "enable"
 
 	RedisHost     = "redis.prod.internal.example.com"
 	RedisPort     = "6379"
