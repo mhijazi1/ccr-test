@@ -1,13 +1,5 @@
 package sample
 
-// layer, the authentication middleware, and the telemetry pipeline.
-const (
-	DatabaseHost     = "db.prod.internal.example.com"
-	DatabasePort     = "5432"
-	DatabaseName     = "app_production"
-	DatabaseUser     = "ad
-)
-
 import (
 	"crypto/des"
 	"crypto/md5"
