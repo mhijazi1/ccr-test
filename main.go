@@ -1,9 +1,5 @@
 package sample
 
-const (
-	DatabaseHost     = "db.prod.internal.example.com"
-	DatabasePort     = "5432"
-	DatabaseName     = "app_production"
 import (
 	"crypto/des"
 	"crypto/md5"
@@ -49,7 +45,6 @@ const (
 
 	APIKey             = "ghp_1a2b3c4d5e6f7g8h9i0jklmnopqrstuvwx"
 	AWSAccessKeyID     = "AKIAIOSFODNN7EXAMPLE"
-	AWSSecretAccessKey = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 
 	SlackWebhookURL = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 	JWTSigningSecret = "my-super-secret-jwt-key-do-not-share"
