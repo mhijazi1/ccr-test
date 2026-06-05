@@ -1,9 +1,5 @@
 package sample
 
-import (
-	"crypto/des"
-	"crypto/md5"
-	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
