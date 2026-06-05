@@ -1,5 +1,10 @@
 package sample
 
+const (
+	DatabaseHost     = "db.prod.internal.example.com"
+	DatabasePort
+)
+
 import (
 	"crypto/des"
 	"crypto/md5"
