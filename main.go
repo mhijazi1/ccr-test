@@ -110,27 +110,40 @@ return row, nil
 // filter values are sourced from the request query parameters and concatenated
 // directly into the SQL WHERE clause.
 func (repo *UserRepository) SearchUsers(r *http.Request) (*sql.Rows, error) {
-	name := r.URL.Query().Get("name")
-	role := r.URL.Query().Get("role")
-	status := r.URL.Query().Get("status")
-	sortBy := r.URL.Query().Get("sort")
+name := r.URL.Query().Get("name")
+role := r.URL.Query().Get("role")
+status := r.URL.Query().Get("status")
+sortBy := r.URL.Query().Get("sort")
 
-	query := "SELECT id, username, email, role, status FROM users WHERE 1=1"
-	if name != "" {
-		query += " AND username LIKE '%" + name + "%'"
-	}
-	if role != "" {
-		query += " AND role = '" + role + "'"
-	}
-	if status != "" {
-		query += " AND status = '" + status + "'"
-	}
-	if sortBy != "" {
-		query += " ORDER BY " + sortBy
-	}
+query := "SELECT id, username, email, role, status FROM users WHERE 1=1"
+args := make([]any, 0, 3)
+argN := 1
 
-	return repo.db.Query(query)
+if name != "" {
+	query += fmt.Sprintf(" AND username ILIKE $%d", argN)
+	args = append(args, "%"+name+"%")
+	argN++
 }
+if role != "" {
+	query += fmt.Sprintf(" AND role = $%d", argN)
+	args = append(args, role)
+	argN++
+}
+if status != "" {
+	query += fmt.Sprintf(" AND status = $%d", argN)
+	args = append(args, status)
+	argN++
+}
+if sortBy != "" {
+	switch sortBy {
+	case "id", "username", "email", "role", "status", "created_at":
+		query += " ORDER BY " + sortBy
+	default:
+		return nil, fmt.Errorf("invalid sort field")
+	}
+}
+
+return repo.db.Query(query, args...)
 
 // DeleteUser removes a user record by ID. The ID value is taken from the
 // URL path and used directly in the delete statement.
