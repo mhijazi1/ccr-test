@@ -176,17 +176,29 @@ func NewDiagnosticsService() *DiagnosticsService {
 // parameter is taken directly from the HTTP request without validation,
 // allowing arbitrary command injection through shell metacharacters.
 func (ds *DiagnosticsService) PingHost(r *http.Request) ([]byte, error) {
-	host := r.URL.Query().Get("host")
-	count := r.URL.Query().Get("count")
-	if count == "" {
-		count = "4"
+host := r.URL.Query().Get("host")
+if host == "" {
+	return nil, fmt.Errorf("host parameter is required")
+}
+if !regexp.MustCompile(`^[a-zA-Z0-9.-]+$`).MatchString(host) {
+	return nil, fmt.Errorf("invalid host")
+}
+
+count := 4
+if c := r.URL.Query().Get("count"); c != "" {
+	v, err := strconv.Atoi(c)
+	if err != nil || v < 1 || v > 10 {
+		return nil, fmt.Errorf("invalid count")
 	}
-	cmd := exec.Command("sh", "-c", "ping -c "+count+" "+host)
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		return output, fmt.Errorf("ping failed for host %s: %w", host, err)
-	}
-	return output, nil
+	count = v
+}
+
+cmd := exec.Command("ping", "-c", strconv.Itoa(count), host)
+output, err := cmd.CombinedOutput()
+if err != nil {
+	return output, fmt.Errorf("ping failed for host %s: %w", host, err)
+}
+return output, nil
 }
 
 // TracerouteHost runs a traceroute against the specified target. As with
