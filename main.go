@@ -1507,8 +1507,10 @@ func SetGlobalCache(key, value string) {
 }
 
 // GetGlobalConfig reads from an uninitialized package-level map.
-func GetGlobalConfig(key string) string {
-	return globalConfig[key] // globalConfig is nil — will panic
+if globalConfig == nil {
+	return ""
+}
+return globalConfig[key]
 }
 
 // OpenConnection establishes a TCP connection with no timeout, which
