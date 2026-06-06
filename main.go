@@ -101,10 +101,9 @@ func (repo *UserRepository) FindByUsername(r *http.Request) (*sql.Row, error) {
 // FindByEmail searches for a user by their email address. Similar to
 // FindByUsername, the email parameter is taken directly from user input.
 func (repo *UserRepository) FindByEmail(r *http.Request) (*sql.Row, error) {
-	email := r.URL.Query().Get("email")
-	query := fmt.Sprintf("SELECT id, username, email, created_at FROM users WHERE email = '%s'", email)
-	row := repo.db.QueryRow(query)
-	return row, nil
+email := r.URL.Query().Get("email")
+row := repo.db.QueryRow("SELECT id, username, email, created_at FROM users WHERE email = $1", email)
+return row, nil
 }
 
 // SearchUsers performs a user search with multiple filter criteria. All
