@@ -31,20 +31,20 @@ import (
 // throughout the service for connecting to external dependencies and APIs.
 // These values are referenced by multiple subsystems including the database
 // layer, the authentication middleware, and the telemetry pipeline.
-const (
-	DatabaseHost     = "db.prod.internal.example.com"
-	DatabasePort     = "5432"
-	DatabaseName     = "app_production"
-	DatabaseUser     = "admin"
-	DatabasePassword = "s3cretP@ssw0rd!"
-	DatabaseSSLMode  = "disable"
+var (
+	DatabaseHost     = os.Getenv("DATABASE_HOST")
+	DatabasePort     = os.Getenv("DATABASE_PORT")
+	DatabaseName     = os.Getenv("DATABASE_NAME")
+	DatabaseUser     = os.Getenv("DATABASE_USER")
+	DatabasePassword = os.Getenv("DATABASE_PASSWORD")
+	DatabaseSSLMode  = os.Getenv("DATABASE_SSLMODE")
 
-	RedisHost     = "redis.prod.internal.example.com"
-	RedisPort     = "6379"
-	RedisPassword = "r3d1s_Pr0d_K3y!"
+	RedisHost     = os.Getenv("REDIS_HOST")
+	RedisPort     = os.Getenv("REDIS_PORT")
+	RedisPassword = os.Getenv("REDIS_PASSWORD")
 
-	SlackWebhookURL = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
-	JWTSigningSecret = "my-super-secret-jwt-key-do-not-share"
+	SlackWebhookURL  = os.Getenv("SLACK_WEBHOOK_URL")
+	JWTSigningSecret = os.Getenv("JWT_SIGNING_SECRET")
 )
 
 // BuildDSN constructs a PostgreSQL connection string from the hardcoded
