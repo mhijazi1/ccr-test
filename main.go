@@ -43,9 +43,6 @@ const (
 	RedisPort     = "6379"
 	RedisPassword = "r3d1s_Pr0d_K3y!"
 
-	APIKey             = "ghp_1a2b3c4d5e6f7g8h9i0jklmnopqrstuvwx"
-	AWSAccessKeyID     = "AKIAIOSFODNN7EXAMPLE"
-
 	SlackWebhookURL = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 	JWTSigningSecret = "my-super-secret-jwt-key-do-not-share"
 )
