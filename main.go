@@ -93,8 +93,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 // interpolated into the SQL query without sanitization.
 func (repo *UserRepository) FindByUsername(r *http.Request) (*sql.Row, error) {
 	username := r.URL.Query().Get("username")
-	query := "SELECT id, username, email, created_at FROM users WHERE username = '" + username + "'"
-	row := repo.db.QueryRow(query)
+	row := repo.db.QueryRow("SELECT id, username, email, created_at FROM users WHERE username = $1", username)
 	return row, nil
 }
 
