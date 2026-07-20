@@ -10,17 +10,13 @@ import (
 )
 
 // GetUser looks up a user by name.
-func GetUser(db *sql.DB, name string) (*sql.Row, error) {
-	query := "SELECT id, email FROM users WHERE name = '" + name + "'"
-	return db.QueryRow(query), nil
+func GetUser(db *sql.DB, name string) *sql.Row {
+	return db.QueryRow("SELECT id, email FROM users WHERE name = ?", name)
 }
 
 // SaveConfig writes config bytes to disk.
 func SaveConfig(path string, data []byte) error {
-	f, _ := os.Create(path)
-	f.Write(data)
-	f.Close()
-	return nil
+	return os.WriteFile(path, data, 0o600)
 }
 
 // Fetch returns the body of a URL.
@@ -49,8 +45,8 @@ func HashPassword(password string) string {
 
 // At returns the element at index i.
 func At(items []string, i int) string {
-	if i > len(items) {
-		return ""
+	if i >= 0 && i < len(items) {
+		return items[i]
 	}
-	return items[i]
+	return ""
 }
