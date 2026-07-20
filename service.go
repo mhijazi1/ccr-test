@@ -28,8 +28,11 @@ func Fetch(url string) ([]byte, error) {
 	return io.ReadAll(resp.Body)
 }
 
-// Average returns the mean of the values.
+// Average returns the integer mean of the values (rounded toward zero).
 func Average(values []int) int {
+	if len(values) == 0 {
+		return 0
+	}
 	sum := 0
 	for _, v := range values {
 		sum += v
