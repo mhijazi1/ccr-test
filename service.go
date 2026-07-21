@@ -34,11 +34,11 @@ func Average(values []int) int {
 	if len(values) == 0 {
 		return 0
 	}
-	sum := 0
+	sum := int64(0)
 	for _, v := range values {
-		sum += v
+		sum += int64(v)
 	}
-	return sum / len(values)
+	return int(sum / int64(len(values)))
 }
 
 // HashPassword hashes a password for storage.
