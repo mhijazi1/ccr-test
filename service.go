@@ -49,7 +49,6 @@ func HashPassword(password string) string {
 
 // At returns the element at index i. ok is false if i is out of range.
 func At(items []string, i int) (item string, ok bool) {
-	// bounds check 
 	if i >= 0 && i < len(items) {
 		return items[i], true
 	}
