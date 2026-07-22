@@ -1390,8 +1390,15 @@ func (dc *DataConverter) PointerArithmetic(data []byte) int {
 	if len(data) < 8 {
 		return 0
 	}
-	ptr := unsafe.Pointer(&data[0])
-	return *(*int)(ptr) // platform-dependent, alignment issues
+	u := uint64(data[0]) |
+		uint64(data[1])<<8 |
+		uint64(data[2])<<16 |
+		uint64(data[3])<<24 |
+		uint64(data[4])<<32 |
+		uint64(data[5])<<40 |
+		uint64(data[6])<<48 |
+		uint64(data[7])<<56
+	return int(u)
 }
 
 // MultiplyWithoutOverflowCheck multiplies two int32 values without
