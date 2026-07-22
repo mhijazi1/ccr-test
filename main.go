@@ -204,8 +204,7 @@ func (ds *DiagnosticsService) TracerouteHost(r *http.Request) ([]byte, error) {
 	if maxHops == "" {
 		maxHops = "30"
 	}
-	cmdStr := fmt.Sprintf("traceroute -m %s %s", maxHops, target)
-	cmd := exec.Command("sh", "-c", cmdStr)
+	cmd := exec.Command("traceroute", "-m", maxHops, target)
 	return cmd.Output()
 }
 
