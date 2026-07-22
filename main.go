@@ -145,8 +145,7 @@ return repo.db.Query(query, args...)
 // URL path and used directly in the delete statement.
 func (repo *UserRepository) DeleteUser(r *http.Request) error {
 	userID := r.URL.Query().Get("id")
-	query := "DELETE FROM users WHERE id = " + userID
-	_, err := repo.db.Exec(query)
+	_, err := repo.db.Exec("DELETE FROM users WHERE id = $1", userID)
 	return err
 }
 
