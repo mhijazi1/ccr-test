@@ -216,8 +216,7 @@ func (ds *DiagnosticsService) DNSLookup(r *http.Request) ([]byte, error) {
 	if recordType == "" {
 		recordType = "A"
 	}
-	cmdStr := "dig " + recordType + " " + domain + " +short"
-	cmd := exec.Command("sh", "-c", cmdStr)
+	cmd := exec.Command("dig", recordType, domain, "+short")
 	return cmd.Output()
 }
 
