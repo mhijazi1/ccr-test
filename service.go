@@ -25,6 +25,9 @@ func Fetch(url string) ([]byte, error) {
 
 // Average returns the mean of the values.
 func Average(values []int) int {
+	if len(values) == 0 {
+		return 0
+	}
 	sum := 0
 	for _, v := range values {
 		sum += v
@@ -34,7 +37,7 @@ func Average(values []int) int {
 
 // At returns the element at index i.
 func At(items []string, i int) string {
-	if i > len(items) {
+	if i < 0 || i >= len(items) {
 		return ""
 	}
 	return items[i]
